@@ -9,7 +9,8 @@ class PokemonGridCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return InkWell(
+      child: Card(
       margin: const EdgeInsets.all(8),
       child: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -38,6 +39,11 @@ class PokemonGridCard extends StatelessWidget {
           );
         },
       ),
+    ),
+    onTap: () {
+        Navigator.pushNamed(context, "/detailsView", arguments: pokemon);
+      },
     );
+      
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:poke_app/provider/pokemon_provider.dart';
+import 'package:poke_app/utils/utils.dart';
 import 'package:poke_app/views/views.dart';
 import 'package:provider/provider.dart';
 
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
       routes: {
         "/splashScreen": (context) => const SplashScreen(),
         "/home": (context) => const PokemonGridView(),
+        "/detailsView": (context) => const PokemonDetailsView(),
+        "/category": (context) => buildCategoryFromContext(context),
       },
     );
   }
