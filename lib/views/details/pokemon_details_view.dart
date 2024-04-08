@@ -7,10 +7,10 @@ class PokemonDetailsView extends StatefulWidget {
   const PokemonDetailsView({super.key});
 
   @override
-  _PokemonDetailsViewState createState() => _PokemonDetailsViewState();
+  PokemonDetailsViewState createState() => PokemonDetailsViewState();
 }
 
-class _PokemonDetailsViewState extends State<PokemonDetailsView> {
+class PokemonDetailsViewState extends State<PokemonDetailsView> {
   String result = "";
 
   @override
@@ -24,7 +24,7 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            _PokemonHeader(pokemon: pokemon),
+            PokemonHeader(pokemon: pokemon),
             Text(
               capitalize(pokemon.name),
               style: const TextStyle(
@@ -82,70 +82,4 @@ class _PokemonDetailsViewState extends State<PokemonDetailsView> {
   }
 }
 
-class _PokemonHeader extends StatefulWidget {
-  const _PokemonHeader({
-    required this.pokemon,
-  });
 
-  final Pokemon pokemon;
-
-  @override
-  _PokemonHeaderState createState() => _PokemonHeaderState();
-}
-
-class _PokemonHeaderState extends State<_PokemonHeader> {
-  int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    final pokemonImagesList = [
-      widget.pokemon.sprites.frontDefault,
-      widget.pokemon.sprites.backDefault
-    ];
-    return Stack(
-      children: [
-        Container(
-          height: 200,
-          color: Colors.green,
-          padding: const EdgeInsets.all(8),
-          alignment: Alignment.center,
-          child: Image(
-            image: NetworkImage(pokemonImagesList[_currentIndex]),
-            fit: BoxFit.contain,
-          ),
-        ),
-        Positioned(
-          left: 0,
-          top: 0,
-          bottom: 0,
-          child: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => getNewIndex(pokemonImagesList.length),
-          ),
-        ),
-        Positioned(
-          right: 0,
-          top: 0,
-          bottom: 0,
-          child: IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            onPressed: () => getNewIndex(pokemonImagesList.length),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void getNewIndex(int pokemonListLength) {
-    int listSize = pokemonListLength;
-    if (_currentIndex < listSize - 1) {
-      setState(() {
-        _currentIndex++;
-      });
-    } else {
-      setState(() {
-        _currentIndex = 0;
-      });
-    }
-  }
-}

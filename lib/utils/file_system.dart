@@ -23,8 +23,12 @@ class FileSystemUtils {
   }
 
   static Future<List<String>> listExternalFolder(String folderName) async {
-    final Directory? appDocDir = await getExternalStorageDirectory();
-    final Directory folderDirectory = Directory('${appDocDir?.path}/$folderName/');
-    return folderDirectory.listSync().map((event) => event.path).toList();
+    try {
+      final Directory? appDocDir = await getExternalStorageDirectory();
+      final Directory folderDirectory = Directory('${appDocDir?.path}/$folderName/');
+      return folderDirectory.listSync().map((event) => event.path).toList();
+    } catch (e) {
+      return [];
+    }
   }
 }
